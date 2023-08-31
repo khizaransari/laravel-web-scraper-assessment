@@ -168,6 +168,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Weidner\Goutte\GoutteServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -182,7 +183,14 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
+        'Goutte' => Weidner\Goutte\GoutteFacade::class,
     ])->toArray(),
 
+    /**
+     * Url to fetch movies
+     */
+
+    'movies' => array(
+        'imdb_url' => env('IMDB_URL', 'https://www.imdb.com')
+    ),
 ];
