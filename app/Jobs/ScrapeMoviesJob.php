@@ -21,7 +21,7 @@ class ScrapeMoviesJob implements ShouldQueue
     {
         try {
             $movies = $this->scrapeMoviesFromIMDb();
-            $this->saveMoviesToDatabase($movies);
+            $this->save($movies);
         } catch (RequestException $e) {
             report($e);
             throw new \Exception('Failed to connect to IMDb. Please try again later.');
@@ -44,7 +44,7 @@ class ScrapeMoviesJob implements ShouldQueue
         });
     }
 
-    private function saveMoviesToDatabase($movies)
+    private function save($movies)
     {
         foreach ($movies as $movie) {
             Movie::updateOrCreate(
